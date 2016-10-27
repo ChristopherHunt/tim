@@ -1,4 +1,4 @@
-tim
+Tim
 ====
 
 Tim is a Magic the Gathering draft AI which is being designed to allow users to
