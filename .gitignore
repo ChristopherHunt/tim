@@ -35,3 +35,6 @@
 
 # NFS files
 *.nfs*
+
+# Extra python files
+__pycache__
