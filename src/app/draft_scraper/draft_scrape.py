@@ -27,4 +27,4 @@ def main():
     to_json_dump(to_dump)
 
 if __name__ == '__main__':
-  main()
+    main()
