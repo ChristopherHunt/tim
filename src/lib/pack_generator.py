@@ -27,11 +27,11 @@ class PackGenerator:
         self.rares = []
         self.lands = ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest']
 
-        ## Parse the card json file
-        self._read_cards_from_json(set_json_file)
-
         ## Parse the card rankings file
         self._read_card_rankings_from_file(card_rankings_file)
+
+        ## Parse the card json file
+        self._read_cards_from_json(set_json_file)
 
     ## Reads all the cards from the input JSON and populates self.names_to_cards
     def _read_cards_from_json(self, set_json_file):
@@ -46,6 +46,8 @@ class PackGenerator:
                       'Colorless': False}
 
             for card in cards_json_obj:
+                card_name = card['name']
+
                 # Clear the color values for the new card
                 for color in colors:
                     colors[color] = False
@@ -69,36 +71,31 @@ class PackGenerator:
                 ## Parse the card's rarity
                 rarity = card['rarity']
                 if 'Common' == rarity:
-                    self.commons.append(card['name'])
+                    self.commons.append(card_name)
                 elif 'Basic Land' == rarity:
                     rarity = 'Common'
                 elif 'Uncommon' == rarity:
-                    self.uncommons.append(card['name'])
+                    self.uncommons.append(card_name)
                 else:
-                    self.rares.append(card['name'])
+                    self.rares.append(card_name)
                     rarity = 'Rare'
 
                 ## Add the card to the dictionary
-                self.names_to_cards[card['name']] =\
-                    Card(card['name'], colors, rarity, card['number'])
+                self.names_to_cards[card_name] =\
+                    Card(card_name, colors, rarity,
+                    self.names_to_rankings[card_name], card['number'])
 
     ## Reads the cards in from the card_ranking_file, assigning their rankings
     ## in the order they are listed in the file (with the first card listed
-    ## having the highest ranking).
+    ## having the rank of 1).
     def _read_card_rankings_from_file(self, card_ranking_file):
 
-        ranking = self._file_len(card_ranking_file)
         with open(card_ranking_file, 'r') as ranking_file:
-            for card in ranking_file:
-                self.names_to_rankings[card] = ranking
-                ranking -= 1
-
-    ## Determine the length of the file
-    def _file_len(self, fname):
-        with open(fname) as f:
-            for i, l in enumerate(f):
-                pass
-        return i + 1
+            ranking = 1
+            for card_name in ranking_file:
+                card_name = card_name.rstrip()
+                self.names_to_rankings[card_name] = ranking
+                ranking += 1
 
     ## Creates a complete Magic the Gathering pack of cards which contains 1
     ## rare, 3 uncommons and 11 commons (includes 1 land).
