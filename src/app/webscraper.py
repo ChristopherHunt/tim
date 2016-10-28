@@ -6,6 +6,7 @@ import urllib
 
 base_html = 'http://www.top8draft.com'
 draft_number = 0
+
 # cleans up links from hrefs array
 def clean_link(href):
     return base_html + href['href']
@@ -30,7 +31,8 @@ def open_link_to_draft(href):
         clean_href = clean_link(link)
         open_link_to_bot_draft(clean_href)
 
-
+# Pull top8draft home page.
+# Open each new draft
 def main():
     webpage = urllib.urlopen(base_html).read()
     soup = BeautifulSoup(webpage, 'lxml')

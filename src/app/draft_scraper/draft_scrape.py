@@ -2,8 +2,10 @@ import json
 from os import listdir
 from os.path import isfile, join
 
+## Enter directory of drafts dump
 path_of_drafts = './training_drafts'
 
+## Open each draft file and scrape the lines beginning with '--> '
 def scrape_drafts(files):
     drafted_decks = []
     # open the text file
@@ -21,6 +23,9 @@ def scrape_drafts(files):
 def to_json_dump(to_dump):
     json.dumps(to_dump)
 
+## Gets list of files in "path_of_drafts"
+## Scrape drafts for cards picked
+## Send to NN...? Come back to this.
 def main():
     files = [f for f in listdir(path_of_drafts) if isfile(join(path_of_drafts, f))]
     to_dump = scrape_drafts(files)
