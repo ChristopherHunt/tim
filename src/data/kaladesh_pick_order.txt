@@ -247,3 +247,8 @@ Madcap Experiment
 Aetherflux Reservoir
 Lost Legacy
 Dubious Challenge
+Island
+Forest
+Plains
+Swamp
+Mountain
