@@ -27,14 +27,6 @@
 *.out
 *.app
 
-# Lab1 stuff
-*.json
-*_gen
-Json2CSV
-
-# TinyFS
-*.dsk
-
 # Logs
 *.log
 
