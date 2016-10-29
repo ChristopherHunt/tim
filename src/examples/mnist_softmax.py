@@ -62,10 +62,8 @@ def main(_):
 
     ''' Define loss and optimizer '''
 
-    ## This is a placeholder which acts as the biases to be applied to each of
-    ## the output "guesses" from the above matrix multipleication. We will use
-    ## this in conjunction with our defined loss and optimization functions to do
-    ## back-propogation so that our NN learns.
+    ## This is a placeholder which holds all of the expected answers for each
+    ## trial run.
     y_ = tf.placeholder(tf.float32, [None, 10])
 
     '''
