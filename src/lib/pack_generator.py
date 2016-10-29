@@ -4,8 +4,8 @@ import json
 import random
 import sys
 
-from card import Card
-from pack import Pack
+from lib.card import Card
+from lib.pack import Pack
 from os.path import isfile
 
 class PackGenerator:
@@ -26,12 +26,35 @@ class PackGenerator:
         self.uncommons = []
         self.rares = []
         self.lands = ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest']
+        self.num_cards_in_set = 0
 
         ## Parse the card rankings file
         self._read_card_rankings_from_file(card_rankings_file)
 
         ## Parse the card json file
         self._read_cards_from_json(set_json_file)
+
+    ## Creates an array of of zeros with size equal to the number of cards in
+    ## the MTG set that the PackGenerator is working off of. For each card in
+    ## the input pack, it marks that card's index with a 1. Returns this array.
+    def _create_pack_array(self, pack):
+        ## Extra 1 b/c cards start numbering at 1
+        pack_array = [0] * (self.num_cards_in_set + 1)
+
+        for card in pack.cards:
+            ## Mark each card in the pack with a 1
+            pack_array[card.number] = 1
+
+        return pack_array
+
+    ## Creates an array of of zeros with size equal to the number of cards in
+    ## the MTG set that the PackGenerator is working off of. It then sets the
+    ## index of the card with the highest rank in the pack equal to 1.
+    def _create_pack_highest_pick_array(self, pack):
+        ## Extra 1 b/c cards start numbering at 1
+        highest_pick_array = [0] * (self.num_cards_in_set + 1)
+        highest_pick_array[pack.highest_ranked_card.number] = 1
+        return highest_pick_array
 
     ## Reads all the cards from the input JSON and populates self.names_to_cards
     def _read_cards_from_json(self, set_json_file):
@@ -80,6 +103,10 @@ class PackGenerator:
                     self.rares.append(card_name)
                     rarity = 'Rare'
 
+                ## Update the max card number in the set
+                self.num_cards_in_set =\
+                    max(self.num_cards_in_set, int(card['number']))
+
                 ## Add the card to the dictionary
                 self.names_to_cards[card_name] =\
                     Card(card_name, colors, rarity,
@@ -96,6 +123,40 @@ class PackGenerator:
                 card_name = card_name.rstrip()
                 self.names_to_rankings[card_name] = ranking
                 ranking += 1
+
+    ## Creates an array of zeros with size equal to the number of cards in the
+    ## MTG set that the PackGenerator is working off of. Then, for each card in
+    ## the pack, it puts a 1 in the array at the index that corresponds to that
+    ## card's number. It additionally creates a second array of the same size,
+    ## with all zeros with a 1 in the index of the card with the highest
+    ## ranking. Returns the tuple of these two arrays.
+    def convert_pack_to_arrays(self, pack):
+        pack_array = self._create_pack_array(pack)
+        highest_pick_array = self._create_pack_highest_pick_array(pack)
+        return pack_array, highest_pick_array
+
+    ## Creates an array of zeros with size equal to the number of cards in the
+    ## MTG set that the PackGenerator is working off of. Then, for each card in
+    ## the pack, it puts a 1 in the array at the index that corresponds to that
+    ## card's number. It additionally creates a second array of the same size,
+    ## with all zeros with a 1 in the index of the card with the highest
+    ## ranking. Returns the tuple of these two arrays.
+    def convert_serialized_pack_to_arrays(self, serialized_pack):
+        pack_list = serialized_pack.split(',')
+        pack_array = [0] * (self.num_cards_in_set + 1)
+        highest_pick_array = [0] * (self.num_cards_in_set + 1)
+
+        ## Pull out the highest ranked card from the serialized pack
+        highest_ranked_card_num = int(pack_list[0])
+
+        ## Set that card's index to a 1 in the pick array
+        highest_pick_array[highest_ranked_card_num] = 1
+
+        ## Set all the cards indices to 1 in the pack_array
+        for card_num in pack_list[1:]:
+            pack_array[int(card_num)] = 1
+
+        return pack_array, highest_pick_array
 
     ## Creates a complete Magic the Gathering pack of cards which contains 1
     ## rare, 3 uncommons and 11 commons (includes 1 land).
@@ -123,15 +184,11 @@ class PackGenerator:
 
         return Pack(cards)
 
-def main():
-    if (len(sys.argv) != 3):
-        print('Improper arguments!\n'
-              'Run as python3 set_file.json card_rankings.txt')
-    pack_gen = PackGenerator(sys.argv[1], sys.argv[2])
-    print('Generating a test booster pack:')
-    pack = pack_gen.generate_pack()
-    print(pack)
-    print('card count: ' + str(pack.count()))
-
-if __name__ == '__main__':
-    main()
+    ## Generates a file full of random MTG booster packs (serialized).
+    ##  count = the number of packs in the file
+    ##  filename = the name of the output file containing the packs
+    def create_random_packs_file(self, count, filename):
+        with open(filename, 'w') as pack_file:
+            for x in range(0, count): 
+                pack = self.generate_pack()
+                pack_file.write(pack.serialize() + '\n')

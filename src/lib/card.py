@@ -16,8 +16,8 @@ class Card:
         self.name = name
         self.colors = dict(colors) ## Makeing a deep copy here
         self.rarity = rarity
-        self.rank = rank
-        self.number = number
+        self.rank = int(rank)
+        self.number = int(number)
 
     def __str__(self):
         toString = '{\n name: ' + str(self.name)
