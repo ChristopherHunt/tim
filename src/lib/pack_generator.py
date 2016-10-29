@@ -6,7 +6,6 @@ import sys
 
 from lib.card import Card
 from lib.pack import Pack
-from os.path import isfile
 
 class PackGenerator:
     'Reads in all the card and ranking information for a given Magic the\
