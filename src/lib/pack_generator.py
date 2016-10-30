@@ -123,6 +123,15 @@ class PackGenerator:
                 self.names_to_rankings[card_name] = ranking
                 ranking += 1
 
+    ## Generates a file full of random MTG booster packs (serialized).
+    ##  count = the number of packs in the file
+    ##  filename = the name of the output file containing the packs
+    def create_random_packs_file(self, count, filename):
+        with open(filename, 'w') as pack_file:
+            for x in range(0, count): 
+                pack = self.generate_pack()
+                pack_file.write(pack.serialize() + '\n')
+
     ## Creates an array of zeros with size equal to the number of cards in the
     ## MTG set that the PackGenerator is working off of. Then, for each card in
     ## the pack, it puts a 1 in the array at the index that corresponds to that
@@ -182,12 +191,3 @@ class PackGenerator:
         cards.append(self.names_to_cards[random.choice(self.lands)])
 
         return Pack(cards)
-
-    ## Generates a file full of random MTG booster packs (serialized).
-    ##  count = the number of packs in the file
-    ##  filename = the name of the output file containing the packs
-    def create_random_packs_file(self, count, filename):
-        with open(filename, 'w') as pack_file:
-            for x in range(0, count): 
-                pack = self.generate_pack()
-                pack_file.write(pack.serialize() + '\n')
