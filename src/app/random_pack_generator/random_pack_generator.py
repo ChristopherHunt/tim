@@ -21,7 +21,7 @@ from lib.draft_data_reader import DraftDataReader
 ## Prints the usage string to stdout.
 def print_usage():
     print('Improper arguments!\n'
-          'Run as python3 <count> <output_file> [set_file.json] [card_rankings.txt]\n'
+          'Run as python3 random_pack_generator.py <count> <output_file> [set_file.json] [card_rankings.txt]\n'
           '|  count = number of random packs to generate\n'
           '|  output_file = the file to write the random packs to\n'
           '|  set_file.json = json filename containing the MTG cards\n'
@@ -46,7 +46,17 @@ def main():
     ## Create PackGenerator for Kaladesh
     pack_gen = PackGenerator(set_file, card_rankings_file)
 
+    ## Generate random packs and write them to the specified file
+    pack_gen.create_random_packs_file(count, output_file)
+
     '''
+    ## Read the generated packs back in using a DraftDataReader
+    draft_data_reader = DraftDataReader(pack_gen)
+    draft_data_reader.read_data(output_file)
+    pack_arrays, highest_pick_arrays = draft_data_reader.next_batch(5)
+    print('pack_arrays: ' + str(pack_arrays))
+    print('highest_pick_arrays: ' + str(highest_pick_arrays))
+
     print('Generating a test booster pack:')
     pack = pack_gen.generate_pack()
     print(pack)
@@ -64,16 +74,6 @@ def main():
         pack_gen.convert_serialized_pack_to_arrays(serialized_pack)
     print('pack_array: ' + str(pack_array))
     print('highest_pick_array: ' + str(highest_pick_array))
-
-    ## Generate random packs and write them to the specified file
-    pack_gen.create_random_packs_file(count, output_file)
-
-    ## Read the generated packs back in using a DraftDataReader
-    draft_data_reader = DraftDataReader(pack_gen)
-    draft_data_reader.read_data(output_file)
-    pack_arrays, highest_pick_arrays = draft_data_reader.next_batch(5)
-    print('pack_arrays: ' + str(pack_arrays))
-    print('highest_pick_arrays: ' + str(highest_pick_arrays))
     '''
 
 if __name__ == '__main__':

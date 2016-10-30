@@ -28,31 +28,39 @@ FLAGS = None
 ## Prints the usage string to stdout.
 def print_usage():
     print('Improper arguments!\n'
-          'Run as python3 timmy.py <serialized_packs.txt> [set_file.json] [card_rankings.txt]\n'
-          '|  serialized_packs.txt = the file containing serialized_packs\n'
+          'Run as python3 timmy.py <training_packs.txt> <validation_packs.txt> [set_file.json] [card_rankings.txt]\n'
+          '|  training_packs.txt = the file containing serialized packs for training the NN\n'
+          '|  validation_packs.txt = the file containing serialized packs for validating the NN\n'
           '|  set_file.json = json filename containing the MTG cards\n'
           '|  card_rankings.txt = file containing rankings for each card\n')
 
 def main(_):
-    if (len(sys.argv) != 2 and len(sys.argv) != 4):
+    if (len(sys.argv) != 3 and len(sys.argv) != 5):
         print_usage()
         sys.exit()
 
     print('Top of main')
 
-    serialized_packs_file = sys.argv[1]
+    training_packs_file = sys.argv[1]
+    validation_packs_file = sys.argv[2]
     set_file = ''
     card_rankings_file = ''
-    if (len(sys.argv) == 2):
+    if (len(sys.argv) == 3):
         set_file = '../../data/kaladesh/kaladesh.json'
         card_rankings_file = '../../data/kaladesh/kaladesh_pick_order.txt'
     else:
-        set_file = sys.argv[2]
-        card_rankings_file = sys.argv[3]
+        set_file = sys.argv[3]
+        card_rankings_file = sys.argv[4]
 
     pack_gen = PackGenerator(set_file, card_rankings_file)
-    draft_data_reader = DraftDataReader(pack_gen)
-    draft_data_reader.read_data(serialized_packs_file)
+
+    ## Create the training data reader
+    training_draft_data_reader = DraftDataReader(pack_gen)
+    training_draft_data_reader.read_data(training_packs_file)
+
+    ## Create the validation data reader
+    validation_draft_data_reader = DraftDataReader(pack_gen)
+    validation_draft_data_reader.read_data(validation_packs_file)
 
     nn_node_height = pack_gen.num_cards_in_set + 1
 
@@ -131,7 +139,7 @@ def main(_):
             print('Training iteration: ' + str(count))
         count += 1
         ## Grab random values from the training set
-        batch_xs, batch_ys = draft_data_reader.next_batch(100)
+        batch_xs, batch_ys = training_draft_data_reader.next_batch(100)
 
         ## Run those values through the model
         sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
@@ -147,7 +155,7 @@ def main(_):
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
     ## Print the % correct
-    batch_xs, batch_ys = draft_data_reader.next_batch(100)
+    batch_xs, batch_ys = validation_draft_data_reader.next_batch(100)
     print(sess.run(accuracy, feed_dict={x: batch_xs, y_: batch_ys}))
 
 if __name__ == '__main__':
