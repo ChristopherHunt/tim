@@ -34,7 +34,7 @@ class Pack:
 
     ## Adds a card to the pack and update the highest_ranked_card if appropriate
     def add(self, card):
-        self.cards.append(copy.copy(card))  ## Copy by value
+        self.cards.append(copy.deepcopy(card))  ## Copy by value
 
         ## Adjust highest card ranking in the pack if the new card is higher
         ## ranked than any other card in the pack.
@@ -46,18 +46,18 @@ class Pack:
         return len(self.cards)
 
     def get_card_at_index(self, index):
-        return self.cards[index]
+        return copy.deepcopy(self.cards[index])
 
     ## Removes the specified card from the pack.
-    ##   card = the name of the card to be removed
-    ## Returns the picked card (or None if not found)
+    ##   card = a reference to a card to pick out of the pack
+    ## Returns True if the card was removed from the pack.
     def pick_card(self, card):
-        picked_card = None
         if card in self.cards:
-            picked_card = self.cards.remove(card) 
+            self.cards.remove(card) 
             if card.rank == self.highest_ranked_card.rank:
                 self._find_highest_ranked_card_in_pack()
-        return picked_card
+            return True
+        return False
 
     ## Returns a string representing the serialized pack. This string has the
     ## following format:

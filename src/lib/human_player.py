@@ -21,13 +21,13 @@ class HumanPlayer(Player):
             card_index = input('Choose a card number to pick: ')
 
             try:
-                card_index = int(float(card_index))
-                if card_index <= pack_count and card_index >= 0:
+                card_index = int(card_index) - 1
+                if card_index <= (pack_count - 1) and card_index >= 0:
                     good_choice = True
                 else:
                     raise ValueError
             except ValueError:
-                print('Invalid input, choose an index between 0 and ' +
+                print('Invalid input, choose an index between 1 and ' +
                        str(pack_count))
 
         return card_index
@@ -43,10 +43,14 @@ class HumanPlayer(Player):
         ## Display all the cards to stdout
         for i in range(0, len(pack.cards)):
             card = pack.get_card_at_index(i)
-            print(str(i) + '. ' + card.name)
+            print(str(i + 1) + '. ' + card.name)
              
         ## Allow the user to choose a card by index         
         card_index = self._get_user_card_choice(pack.count())
 
         ## Add that card to the player's deck while removing it from the pack
-        self.deck.add_card(copy.copy(pack.pick_card(card)))
+        card = pack.get_card_at_index(card_index)
+        if pack.pick_card(card):
+            self.deck.add_card(card)
+        else:
+            raise ValueError

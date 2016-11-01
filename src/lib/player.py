@@ -21,5 +21,5 @@ class Player(object):
         to_string += str(self.deck)
         to_string += '\n\n'
 
-        with open(output_file, 'w') as out_file:
+        with open(output_file, 'a') as out_file:
             out_file.write(to_string)

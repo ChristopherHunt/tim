@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-class AICore:
+class AICore(object):
     'Class to define the interface for the core card choosing logic for a bot.'
 
     def __init__(self, name):

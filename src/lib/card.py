@@ -40,3 +40,6 @@ class Card:
         toString += '\n' + ' rank: ' + str(self.rank)
         toString += '\n' + ' number: ' + str(self.number) + '\n' + '}'
         return toString
+
+    def __eq__(self, other):
+        return self.name == other.name and self.number == other.number

@@ -3,6 +3,7 @@
 import sys
 
 import collections
+import os
 
 from lib.ai_core import AICore
 from lib.pack_generator import PackGenerator
@@ -25,7 +26,7 @@ class DraftGenerator:
         self.player_queue.append(HumanPlayer('Human'))
 
         ## Add the AI drafters
-        for x in range(0, 7):
+        for x in range(1, 8):
             ai_name = ai_core.name() + '_' + str(x)
             self.player_queue.append(AIPlayer(ai_name, ai_core))
 
@@ -78,6 +79,7 @@ class DraftGenerator:
 
     ## Prints each player's deck information to the specified file.
     def _print_draft_results(self, output_file):
+        os.remove(output_file)
         for player in self.player_queue:
             player.print_deck_to_file(output_file)
 
@@ -88,7 +90,7 @@ class DraftGenerator:
 
         ## Draft the first pack
         self._draft_left(pack_generator)
-        
+
         ## Draft the second pack
         self._draft_right(pack_generator)
 

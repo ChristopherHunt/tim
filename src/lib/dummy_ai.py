@@ -14,4 +14,7 @@ class DummyAI(AICore):
         card = pack.get_card_at_index(0)
 
         ## Return the card to the calling AI bot
-        return pack.pick_card(card)
+        if pack.pick_card(card):
+            return card
+        else:
+            raise ValueError
