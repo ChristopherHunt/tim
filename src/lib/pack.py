@@ -16,10 +16,10 @@ class Pack:
         self._find_highest_ranked_card_in_pack()
 
     def __str__(self):
-        toString = ""
+        to_string = ''
         for card in self.cards:
-            toString += str(card) + '\n'
-        return toString            
+            to_string += str(card) + '\n'
+        return to_string            
 
     ## Finds the highest ranked card in the pack and updates the 
     ## self.highest_ranked_card reference to point to that card.
@@ -45,16 +45,19 @@ class Pack:
     def count(self):
         return len(self.cards)
 
+    def get_card_at_index(self, index):
+        return self.cards[index]
+
     ## Removes the specified card from the pack.
     ##   card = the name of the card to be removed
-    ## Returns true if the card was removed.
-    def pick(self, card):
+    ## Returns the picked card (or None if not found)
+    def pick_card(self, card):
+        picked_card = None
         if card in self.cards:
-            self.cards.remove(card) 
+            picked_card = self.cards.remove(card) 
             if card.rank == self.highest_ranked_card.rank:
                 self._find_highest_ranked_card_in_pack()
-            return True
-        return False
+        return picked_card
 
     ## Returns a string representing the serialized pack. This string has the
     ## following format:

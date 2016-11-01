@@ -38,3 +38,4 @@
 
 # Extra python files
 __pycache__
+*.pyc
