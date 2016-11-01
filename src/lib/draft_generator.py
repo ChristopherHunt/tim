@@ -1,15 +1,13 @@
 #!/usr/bin/python3
 
-import sys
-
 import collections
 import os
+import sys
 
 from lib.ai_core import AICore
-from lib.pack_generator import PackGenerator
-from lib.player import Player
 from lib.ai_player import AIPlayer
 from lib.human_player import HumanPlayer
+from lib.pack_generator import PackGenerator
 
 class DraftGenerator:
     'Creates a draft of 7 AI\'s and a single player'
@@ -79,7 +77,11 @@ class DraftGenerator:
 
     ## Prints each player's deck information to the specified file.
     def _print_draft_results(self, output_file):
-        os.remove(output_file)
+        ## Remove the file if it exists
+        if os.path.isfile(output_file):
+            os.remove(output_file)
+
+        ## Write each player's deck to the output file
         for player in self.player_queue:
             player.print_deck_to_file(output_file)
 

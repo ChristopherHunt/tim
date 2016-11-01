@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-import sys
 import os
+import sys
 
 ## Import path hacking to make this run referencing the modules it needs.
 PACKAGE_PARENT = '../..'

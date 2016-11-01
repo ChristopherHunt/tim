@@ -6,8 +6,10 @@ class AICore(object):
     def __init__(self, name):
         self.ai_name = name
 
+    ## Returns the name of the AI.
     def name(self):
         return self.ai_name
         
+    ## Picks a card from a pack using the specified AI logic.
     def pick_card_from_pack(self, pack):
          raise NotImplementedError('pick_card_from_pack not implemented!')

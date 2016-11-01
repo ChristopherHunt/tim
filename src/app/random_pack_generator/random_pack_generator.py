@@ -6,8 +6,8 @@ for use in training a MTG pack NN. See the useage printout for more information
 on how to run this.
 '''
 
-import sys
 import os
+import sys
 
 ## Import path hacking to make this run referencing the modules it needs.
 PACKAGE_PARENT = '../..'
