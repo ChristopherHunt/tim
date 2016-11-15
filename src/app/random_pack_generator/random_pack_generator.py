@@ -21,33 +21,38 @@ from lib.draft_data_reader import DraftDataReader
 ## Prints the usage string to stdout.
 def print_usage():
     print('Improper arguments!\n'
-          'Run as python3 random_pack_generator.py <count> <output_file> [set_file.json] [card_rankings.txt]\n'
+          'Run as python3 random_pack_generator.py <count> <min_cards_in_pack> <max_cards_in_pack> <output_file> [set_file.json] [card_rankings.txt]\n'
           '|  count = number of random packs to generate\n'
+          '|  min_cards_in_pack = the minimum number of cards in packs to gen\n'
+          '|  max_cards_in_pack = the maximum number of cards in packs to gen\n'
           '|  output_file = the file to write the random packs to\n'
           '|  set_file.json = json filename containing the MTG cards\n'
           '|  card_rankings.txt = file containing rankings for each card\n')
 
 def main():
-    if (len(sys.argv) != 3 and len(sys.argv) != 5):
+    if (len(sys.argv) != 5 and len(sys.argv) != 7):
         print_usage()
         sys.exit()
 
     count = int(sys.argv[1])
-    output_file = sys.argv[2]
+    min_cards_in_pack = int(sys.argv[2])
+    max_cards_in_pack = int(sys.argv[3])
+    output_file = sys.argv[4]
     set_file = ''
     card_rankings_file = ''
-    if (len(sys.argv) == 3):
+    if (len(sys.argv) == 5):
         set_file = '../../data/kaladesh/kaladesh.json'
         card_rankings_file = '../../data/kaladesh/kaladesh_pick_order.txt'
     else:
-        set_file = sys.argv[3]
-        card_rankings_file = sys.argv[4]
+        set_file = sys.argv[5]
+        card_rankings_file = sys.argv[6]
 
     ## Create PackGenerator for Kaladesh
     pack_gen = PackGenerator(set_file, card_rankings_file)
 
     ## Generate random packs and write them to the specified file
-    pack_gen.create_random_packs_file(count, output_file)
+    pack_gen.create_random_packs_file(count, min_cards_in_pack,
+                                      max_cards_in_pack, output_file)
 
     '''
     ## Read the generated packs back in using a DraftDataReader

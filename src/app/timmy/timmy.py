@@ -28,14 +28,16 @@ FLAGS = None
 ## Prints the usage string to stdout.
 def print_usage():
     print('Improper arguments!\n'
-          'Run as python3 timmy.py <training_packs.txt> <validation_packs.txt> [set_file.json] [card_rankings.txt]\n'
+          'Run as python3 timmy.py <training_packs.txt> <validation_packs.txt> <training_iterations> <model_name> [set_file.json] [card_rankings.txt]\n'
           '|  training_packs.txt = the file containing serialized packs for training the NN\n'
           '|  validation_packs.txt = the file containing serialized packs for validating the NN\n'
+          '|  training_iterations = the number of iterations to train the NN\n'
+          '|  model_name = the filename to save the trained NN model to\n'
           '|  set_file.json = json filename containing the MTG cards\n'
           '|  card_rankings.txt = file containing rankings for each card\n')
 
 def main(_):
-    if (len(sys.argv) != 3 and len(sys.argv) != 5):
+    if (len(sys.argv) != 5 and len(sys.argv) != 7):
         print_usage()
         sys.exit()
 
@@ -43,14 +45,16 @@ def main(_):
 
     training_packs_file = sys.argv[1]
     validation_packs_file = sys.argv[2]
+    training_iterations = int(sys.argv[3])
+    model_name = sys.argv[4]
     set_file = ''
     card_rankings_file = ''
-    if (len(sys.argv) == 3):
+    set_file = '../../data/kaladesh/kaladesh.json'
+    card_rankings_file = '../../data/kaladesh/kaladesh_pick_order.txt'
+
+    if (len(sys.argv) == 5):
         set_file = '../../data/kaladesh/kaladesh.json'
         card_rankings_file = '../../data/kaladesh/kaladesh_pick_order.txt'
-    else:
-        set_file = sys.argv[3]
-        card_rankings_file = sys.argv[4]
 
     pack_gen = PackGenerator(set_file, card_rankings_file)
 
@@ -120,9 +124,10 @@ def main(_):
     ## Initilize all variables and placeholders for this training session.
     sess = tf.InteractiveSession()
 
-    ''' Train the model '''
-
     print('Starting the session')
+    saver = tf.train.Saver()
+
+    ''' Train the model '''
 
     ## Launches the training session
     tf.initialize_all_variables().run()
@@ -134,7 +139,7 @@ def main(_):
     ## randomly tends to be almost as effective as training over the entire
     ## dataset (and it saves time).
     count = 0
-    for _ in range(1000):
+    for _ in range(training_iterations):
         if count % 100 == 0:
             print('Training iteration: ' + str(count))
         count += 1
@@ -157,6 +162,9 @@ def main(_):
     ## Print the % correct
     batch_xs, batch_ys = validation_draft_data_reader.next_batch(100)
     print(sess.run(accuracy, feed_dict={x: batch_xs, y_: batch_ys}))
+
+    ''' Save Dat Model Yo! '''
+    saver.save(sess, model_name)
 
 if __name__ == '__main__':
     '''
