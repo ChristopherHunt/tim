@@ -1,0 +1,416 @@
+Event #: 124018
+Time:    10/24/2016 10:52 p.m.
+Players:
+    Stevel
+    Bot1
+--> Bot2
+    Bot3
+    Bot4
+    Bot5
+    Bot6
+    Bot7
+
+------ KLD ------ 
+
+Pack 1 pick 1:
+    Aether Hub
+    Glassblower's Puzzleknot
+    Peema Outrider
+    Fragmentize
+--> Lathnu Hellion
+    Wind Drake
+    Subtle Strike
+    Weaponcraft Enthusiast
+    Eddytrail Hawk
+    Mind Rot
+    Spireside Infiltrator
+    Cathartic Reunion
+    Consul's Shieldguard
+    Built to Smash
+
+Pack 1 pick 2:
+    Inventor's Goggles
+    Spireside Infiltrator
+    Wildest Dreams
+    Ornamental Courage
+--> Ballista Charger
+    Weldfast Wingsmith
+    Eager Construct
+    Foundry Screecher
+    Engineered Might
+    Sage of Shaila's Claim
+    Night Market Lookout
+    Skyswirl Harrier
+    Tasseled Dromedary
+
+Pack 1 pick 3:
+    Dukhara Peafowl
+    Failed Inspection
+    Durable Handicraft
+    Dubious Challenge
+--> Riparian Tiger
+    Ceremonious Rejection
+    Weldfast Wingsmith
+    Torch Gauntlet
+    Foundry Screecher
+    Demolish
+    Skyswirl Harrier
+    Dramatic Reversal
+
+Pack 1 pick 4:
+    Aether Theorist
+    Giant Spectacle
+    Durable Handicraft
+    Failed Inspection
+--> Peema Outrider
+    Thriving Turtle
+    Contraband Kingpin
+    Subtle Strike
+    Thriving Rats
+    Cowl Prowler
+    Eddytrail Hawk
+
+Pack 1 pick 5:
+    Weldfast Monitor
+    Animation Module
+    Tezzeret's Ambition
+--> Sage of Shaila's Claim
+    Janjeet Sentry
+    Fortuitous Find
+    Rush of Vitality
+    Live Fast
+    Ornamental Courage
+    Eddytrail Hawk
+
+Pack 1 pick 6:
+    Hightide Hermit
+    Workshop Assistant
+--> Long-Finned Skywhale
+    Wily Bandar
+    Dramatic Reversal
+    Cathartic Reunion
+    Accomplished Automaton
+    Larger Than Life
+    Fragmentize
+
+Pack 1 pick 7:
+    Gearseeker Serpent
+    Appetite for the Unnatural
+--> Attune with Aether
+    Aetherflux Reservoir
+    Fortuitous Find
+    Cogworker's Puzzleknot
+    Demolish
+    Thrivingg Ibex
+
+Pack 1 pick 8:
+    Select for Inspection
+    Maulfist Squad
+--> Glint-Nest Crane
+    Giant Spectacle
+    Gearseeker Serpent
+    Cathartic Reunion
+    Inventor's Goggles
+
+Pack 1 pick 9:
+    Glassblower's Puzzleknot
+    Fragmentize
+--> Wind Drake
+    Mind Rot
+    Cathartic Reunion
+    Built to Smash
+
+Pack 1 pick 10:
+    Spireside Infiltrator
+    Ornamental Courage
+--> Weldfast Wingsmith
+    Night Market Lookout
+    Tasseled Dromedary
+
+Pack 1 pick 11:
+    Failed Inspection
+    Dubious Challenge
+--> Ceremonious Rejection
+    Dramatic Reversal
+
+Pack 1 pick 12:
+    Giant Spectacle
+    Failed Inspection
+--> Thriving Turtle
+
+Pack 1 pick 13:
+    Tezzeret's Ambition
+--> Janjeet Sentry
+
+Pack 1 pick 14:
+--> Wily Bandar
+
+------ KLD ------ 
+
+Pack 2 pick 1:
+    Wind Drake
+    Inventor's Goggles
+--> Riparian Tiger
+    Aether Tradewinds
+    Toolcraft Exemplar
+    Thrivingg Ibex
+    Weaponcraft Enthusiast
+    Hijack
+    Wispweaver Angel
+    Night Market Lookout
+    Self-Assembler
+    Cathartic Reunion
+    Veteran Motorist
+    Wily Bandar
+
+Pack 2 pick 2:
+    Incendiary Sabotage
+    Live Fast
+--> Riparian Tiger
+    Vedalken Blademaster
+    Aviary Mechanic
+    Workshop Assistant
+    Speedway Fanatic
+    Salivating Gremlins
+    Ambitious Aetherborn
+    Consulate Skygate
+    Sage of Shaila's Claim
+    Take Down
+    Veteran Motorist
+
+Pack 2 pick 3:
+    Select for Inspection
+    Subtle Strike
+--> Malfunction
+    Larger Than Life
+    Toolcraft Exemplar
+    Fretwork Colony
+    Dhund Operative
+    Terror of the Fairgrounds
+    Aviary Mechanic
+    Failed Inspection
+    Speedway Fanatic
+    Inspired Charge
+
+Pack 2 pick 4:
+    Dukhara Peafowl
+    Highspire Artisan
+--> Iron League Steed
+    Curio Vendor
+    Die Young
+    Ninth Bridge Patrol
+    Thriving Grubs
+    Herald of the Fair
+    Impeccable Timing
+    Attune with Aether
+    Thrivingg Ibex
+
+Pack 2 pick 5:
+    Aether Tradewinds
+    Cowl Prowler
+--> Sage of Shaila's Claim
+    Larger Than Life
+    Dhund Operative
+    Mind Rot
+    Spontaneous Artist
+    Cloudblazer
+    Spireside Infiltrator
+    Dukhara Peafowl
+
+Pack 2 pick 6:
+    Disappearing Act
+    Fortuitous Find
+--> Wind Drake
+    Engineered Might
+    Live Fast
+    Reckless Fireweaver
+    Fragmentize
+    Appetite for the Unnatural
+    Vedalken Blademaster
+
+Pack 2 pick 7:
+    Vedalken Blademaster
+    Commencement of Festivities
+--> Aether Theorist
+    Fragmentize
+    Terror of the Fairgrounds
+    Perpetual Timepiece
+    Larger Than Life
+    Select for Inspection
+
+Pack 2 pick 8:
+    Wily Bandar
+--> Experimental Aviator
+    Spireside Infiltrator
+    Ruinous Gremlin
+    Revolutionary Rebuff
+    Ornamental Courage
+    Curio Vendor
+
+Pack 2 pick 9:
+--> Aether Tradewinds
+    Thrivingg Ibex
+    Hijack
+    Night Market Lookout
+    Cathartic Reunion
+    Wily Bandar
+
+Pack 2 pick 10:
+--> Vedalken Blademaster
+    Workshop Assistant
+    Salivating Gremlins
+    Consulate Skygate
+    Take Down
+
+Pack 2 pick 11:
+--> Larger Than Life
+    Fretwork Colony
+    Terror of the Fairgrounds
+    Failed Inspection
+
+Pack 2 pick 12:
+--> Curio Vendor
+    Ninth Bridge Patrol
+    Herald of the Fair
+
+Pack 2 pick 13:
+--> Larger Than Life
+    Mind Rot
+
+Pack 2 pick 14:
+--> Engineered Might
+
+------ KLD ------ 
+
+Pack 3 pick 1:
+    Era of Innovation
+    Wayward Giant
+    Foundry Screecher
+    Ornamental Courage
+--> Ballista Charger
+    Disappearing Act
+    Wildest Dreams
+    Night Market Lookout
+    Pressure Point
+    Dramatic Reversal
+    Riparian Tiger
+    Cathartic Reunion
+    Salivating Gremlins
+    Renegade Tactics
+
+Pack 3 pick 2:
+    Whirlermaker
+    Nimble Innovator
+    Peema Outrider
+    Take Down
+--> Fairgrounds Trumpeter
+    Aether Theorist
+    Pressure Point
+    Live Fast
+    Maulfist Squad
+    Riparian Tiger
+    Morbid Curiosity
+    Glint-Sleeve Artisan
+    Terror of the Fairgrounds
+
+Pack 3 pick 3:
+    Wispweaver Angel
+    Giant Spectacle
+    Essence Extraction
+    Cathartic Reunion
+--> Wild Wanderer
+    Thriving Turtle
+    Night Market Lookout
+    Foundry Screecher
+    Maulfist Squad
+    Attune with Aether
+    Acrobatic Maneuver
+    Failed Inspection
+
+Pack 3 pick 4:
+    Propeller Pioneer
+    Curio Vendor
+    Fabrication Module
+    Mind Rot
+--> Aether Theorist
+    Hightide Hermit
+    Built to Last
+    Salivating Gremlins
+    Acrobatic Maneuver
+    Riparian Tiger
+    Captured by the Consulate
+
+Pack 3 pick 5:
+    Inspiring Vantage
+    Highspire Artisan
+    Curio Vendor
+--> Aether Theorist
+    Dukhara Peafowl
+    Night Market Lookout
+    Dukhara Scavenger
+    Harsh Scrutiny
+    Aether Meltdown
+    Veteran Motorist
+
+Pack 3 pick 6:
+    Cogworker's Puzzleknot
+    Riparian Tiger
+--> Aether Meltdown
+    Select for Inspection
+    Fragmentize
+    Renegade Tactics
+    Harsh Scrutiny
+    Built to Smash
+    Spark of Creativity
+
+Pack 3 pick 7:
+    Weldfast Wingsmith
+    Wild Wanderer
+--> Gearseeker Serpent
+    Perpetual Timepiece
+    Diabolic Tutor
+    Cogworker's Puzzleknot
+    Giant Spectacle
+    Herald of the Fair
+
+Pack 3 pick 8:
+    Thriving Turtle
+    Wild Wanderer
+--> Malfunction
+    Wind Drake
+    Morbid Curiosity
+    Wily Bandar
+    Workshop Assistant
+
+Pack 3 pick 9:
+    Wayward Giant
+    Ornamental Courage
+--> Disappearing Act
+    Dramatic Reversal
+    Cathartic Reunion
+    Renegade Tactics
+
+Pack 3 pick 10:
+    Nimble Innovator
+    Take Down
+--> Aether Theorist
+    Morbid Curiosity
+    Terror of the Fairgrounds
+
+Pack 3 pick 11:
+    Giant Spectacle
+    Cathartic Reunion
+--> Thriving Turtle
+    Failed Inspection
+
+Pack 3 pick 12:
+    Curio Vendor
+    Mind Rot
+--> Hightide Hermit
+
+Pack 3 pick 13:
+    Curio Vendor
+--> Dukhara Peafowl
+
+Pack 3 pick 14:
+--> Select for Inspection
