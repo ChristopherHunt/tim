@@ -16,6 +16,9 @@ def scrape_drafts(files):
                 if line[:4] == '--> ':
                     card = line[4:]
                     deck.append(card)
+                if "------ KLD ------ " in line:
+                    card = line
+                    deck.append(card)
         drafted_decks.append(deck)
     return drafted_decks
 
@@ -24,6 +27,9 @@ def write_to_file(drafts):
     for draft in drafts:
         with open('all_drafts.txt', 'a') as file_in:
             for card in draft:
+                if "------ KLD ------ " in card:
+                    file_in.write('\n')
+                    continue
                 if (card[:3] != 'Bot'):
                     f_card = card.replace(' ', '_')
                     f_card = f_card.replace('\n', '')
@@ -38,7 +44,7 @@ def main():
     files = [f for f in listdir(path_of_drafts) if isfile(join(path_of_drafts, f))]
     to_write = scrape_drafts(files)
     write_to_file(to_write)
-    
+
 
 if __name__ == '__main__':
     main()
