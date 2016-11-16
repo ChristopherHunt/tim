@@ -166,6 +166,17 @@ def main(_):
     ''' Save Dat Model Yo! '''
     saver.save(sess, model_name)
 
+    '''
+    ## This is just an example of how to send a single pack through the NN
+    batch_xs = validation_draft_data_reader.next_batch(1)
+    print('batch_xs: ')
+    print(batch_xs[0])
+    softmax_y = tf.nn.softmax(y)
+    fetches = [softmax_y]
+    res = sess.run(fetches, feed_dict = {x: batch_xs[0]})
+    print(res)
+    '''
+
 if __name__ == '__main__':
     '''
     parser = argparse.ArgumentParser()

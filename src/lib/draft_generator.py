@@ -35,7 +35,7 @@ class DraftGenerator:
 
         ## Give each player's seat a pack to draft from
         for x in range(0, 8):
-            self.pack_queue.append(pack_generator.generate_pack())
+            self.pack_queue.append(pack_generator.generate_pack(15))
 
     ## Drafts a full round rotating to the left.
     def _draft_left(self, pack_generator):

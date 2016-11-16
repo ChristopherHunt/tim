@@ -48,6 +48,13 @@ class Pack:
     def get_card_at_index(self, index):
         return copy.deepcopy(self.cards[index])
 
+    ## Returns True if the specified Card is in the pack.
+    def has_card(self, target_card):
+      for card in self.cards:
+        if card.number == target_card.number: 
+          return True
+      return False
+
     ## Removes the specified card from the pack.
     ##   card = a reference to a card to pick out of the pack
     ## Returns True if the card was removed from the pack.
