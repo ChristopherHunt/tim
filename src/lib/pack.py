@@ -21,6 +21,12 @@ class Pack:
             to_string += str(card) + '\n'
         return to_string            
 
+    def card_names(self):
+        card_names = []
+        for card in self.cards:
+            card_names.append(card.name)
+        return copy.deepcopy(card_names)
+
     ## Finds the highest ranked card in the pack and updates the 
     ## self.highest_ranked_card reference to point to that card.
     def _find_highest_ranked_card_in_pack(self):
@@ -44,7 +50,7 @@ class Pack:
     ## Returns the number of cards within the pack.
     def count(self):
         return len(self.cards)
-
+        
     def get_card_at_index(self, index):
         return copy.deepcopy(self.cards[index])
 

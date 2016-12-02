@@ -11,6 +11,7 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 from lib.dummy_ai import DummyAI
 from lib.timmy_ai import TimmyAI
+from lib.johnny_ai import JohnnyAI
 from lib.draft_generator import DraftGenerator
 from lib.pack_generator import PackGenerator
 
@@ -36,8 +37,8 @@ def main():
     set_file = '../../data/kaladesh/kaladesh.json'
     card_rankings_file = '../../data/kaladesh/kaladesh_pick_order.txt'
     if (len(sys.argv) == 5):
-        set_file = sys.argv[2]
-        card_rankings_file = sys.argv[3]
+        set_file = sys.argv[3]
+        card_rankings_file = sys.argv[4]
 
     ## Create PackGenerator for Kaladesh
     pack_gen = PackGenerator(set_file, card_rankings_file)
@@ -46,7 +47,7 @@ def main():
     draft_gen = DraftGenerator()
 
     ## Create an AI Core for the opponents in the draft
-    ai_core = TimmyAI(pack_gen, tensor_flow_nn_filename)
+    ai_core = JohnnyAI(pack_gen, tensor_flow_nn_filename)
 
     ## Run a draft!
     draft_gen.draft(ai_core, pack_gen, output_file)

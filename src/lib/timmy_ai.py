@@ -24,15 +24,17 @@ class TimmyAI(AICore):
         self._initialize_tensor_flow_nn(tensor_flow_nn_filename)
 
     ## Picks a card from the pack and returns it to the bot that called it.
-    def pick_card_from_pack(self, pack):
+    def pick_card_from_pack(self, deck, pack):
         pack_input = self.pack_gen.convert_pack_to_array(pack)
         fetches = [tf.nn.softmax(self.y)]
         res = self.session.run(fetches, feed_dict = {self.x: [pack_input]})
         card_number_array = res[0][0]
 
-        ## Find the card which the Bot would ideally like to pick from the pack.
+        ## Find the card which Timmy would ideally like to pick from the pack.
         max_index = self._find_max_index(card_number_array)
         card = self.pack_gen.get_card_from_number(max_index)
+        print('card name: ' + card.name)
+        print('card color: ' + str(self.pack_gen.get_card_color_from_card_number(max_index)))
 
         ## Loop until the Bot picks a card. This loop is needed because the Bot
         ## might try to pick a card which isn't in the pack. So when that

@@ -11,4 +11,4 @@ class AIPlayer(Player):
 
     ## Chooses a card from the pack as specified by the bot's ai_core.
     def pick_card_from_pack(self, pack):
-        self.deck.add_card(self.ai_core.pick_card_from_pack(pack))
+        self.deck.add_card(self.ai_core.pick_card_from_pack(self.deck, pack))

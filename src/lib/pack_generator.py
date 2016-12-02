@@ -220,3 +220,25 @@ class PackGenerator:
           if card.number == card_number:
             return copy.deepcopy(card)
         return None
+
+    ## Returns the card color to the caller as a dictionary of the following
+    ## form:
+    ##        colors = {'White'     : True/False,
+    ##                  'Blue'      : True/False,
+    ##                  'Black'     : True/False,
+    ##                  'Red'       : True/False,
+    ##                  'Green'     : True/False,
+    ##                  'Colorless' : True/False}
+    ##
+    ## where an entry will be True iff the card is of that color. Note also that
+    ## a card can be multiple colors which is why all the colors are
+    ## represented. Additionally, a card can be both colorless and have colored
+    ## mana-costs (due to mechanics like 'Devoid' in Magic).
+    ##
+    ## If the specified card number is not in the set of cards, None is
+    ##returned.
+    def get_card_color_from_card_number(self, card_number):
+      for card in self.names_to_cards.values(): 
+        if card.number == card_number:
+          return copy.deepcopy(card.colors)
+      return None

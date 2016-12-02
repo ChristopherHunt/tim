@@ -6,10 +6,10 @@ class DummyAI(AICore):
     'Test class to implement AI core.'
 
     def __init__(self):
-        AICore.__init__(self, 'dummy')
+        AICore.__init__(self, 'Dummy')
 
     ## Picks a card from the pack and returns it to the bot that called it.
-    def pick_card_from_pack(self, pack):
+    def pick_card_from_pack(self, deck, pack):
         ## Always try and pick the first card in the pack
         card = pack.get_card_at_index(0)
 

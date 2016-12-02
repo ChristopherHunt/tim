@@ -11,5 +11,5 @@ class AICore(object):
         return self.ai_name
         
     ## Picks a card from a pack using the specified AI logic.
-    def pick_card_from_pack(self, pack):
+    def pick_card_from_pack(self, deck, pack):
          raise NotImplementedError('pick_card_from_pack not implemented!')
