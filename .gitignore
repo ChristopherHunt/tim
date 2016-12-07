@@ -39,3 +39,7 @@
 # Extra python files
 __pycache__
 *.pyc
+
+# TensorFlow models
+src/examples/word_prediction_27/med_model
+src/examples/word_prediction_27/small_model

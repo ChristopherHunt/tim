@@ -63,15 +63,12 @@ def main():
         print_usage()
         sys.exit()
 
-    # print (sys.argv)
     serialized_draft_dir = sys.argv[1]
     output_dir = sys.argv[2]
     tensor_flow_nn_filename = sys.argv[3]
 
-    # print ('input path: ', serialized_draft_dir)
+    # get the path names of all input files
     paths = glob.glob(serialized_draft_dir + '*.txt')
-    # print (paths)
-    # input()
 
     set_file = ''
     card_rankings_file = ''
