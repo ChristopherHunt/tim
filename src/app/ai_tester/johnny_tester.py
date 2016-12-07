@@ -3,6 +3,7 @@
 import copy
 import os
 import sys
+import glob
 
 ## Import path hacking to make this run referencing the modules it needs.
 PACKAGE_PARENT = '../..'
@@ -25,13 +26,10 @@ def print_usage():
                                           '<tensor_flow_nn_filename> '
                                           '[set_file.json] '
                                           '[card_rankings.txt]\n'
-          '|  serialized_draft_filename = the file containing the serialized '
+          '|  serialized_draft_dir = the directory containing the serialized '
                                          'draft data.\n'
-          '|  ai_picks_output_filename = the file to write the final deck of '
-                                        'cards picked by the ai to.\n'
-          '|  datum_picks_output_filename = the file to write the datum deck '
-                                           'of cards which the ai should pick '
-                                           'to.\n'
+          '|  output_draft_dir = the directory the results will be written to'
+                                                                        '.\n'
           '|  tensor_flow_nn_filename = the file containing the Tensor Flow NN '
                                        'used for the AI\n'
           '|  set_file.json = json filename containing the MTG cards\n'
@@ -39,11 +37,17 @@ def print_usage():
 
 ## Writes a list named deck to the output file specified, with each value being
 ## placed on a separate line. I know I should check return values but ehhhh.
-def write_deck_to_file(deck, filename):
-    file_handle = open(filename, 'w')
-    for card_index in deck:
-      file_handle.write(str(card_index) + '\n')
-    file_handle.close()
+def write_deck_to_file(deck, directory, file_name, name_type):
+    # generate a unique filename
+    # split the path to get the name from the end
+    file_name = file_name.split('/')[-1]
+    # get the name of the draft file
+    file_name = '_'.join(file_name.split('_')[:2])
+    # prepend with 'datum' or 'text'
+    file_name = name_type + '_' + file_name + '.txt'
+    with open(directory + file_name, 'w') as file_out:
+        for card_index in deck:
+          file_out.write(str(card_index) + '\n')
 
 ## Reads the contents of a file into a list and returns that list to the caller.
 def read_file_into_list(filename):
@@ -55,22 +59,27 @@ def read_file_into_list(filename):
     return copy.deepcopy(contents)
 
 def main():
-    if (len(sys.argv) != 5 and len(sys.argv) != 7):
+    if (len(sys.argv) != 4 and len(sys.argv) != 6):
         print_usage()
         sys.exit()
 
-    serialized_draft_filename = sys.argv[1]
-    ai_picks_output_filename = sys.argv[2]
-    datum_picks_output_filename = sys.argv[3]
-    tensor_flow_nn_filename = sys.argv[4]
+    # print (sys.argv)
+    serialized_draft_dir = sys.argv[1]
+    output_dir = sys.argv[2]
+    tensor_flow_nn_filename = sys.argv[3]
+
+    # print ('input path: ', serialized_draft_dir)
+    paths = glob.glob(serialized_draft_dir + '*.txt')
+    # print (paths)
+    # input()
 
     set_file = ''
     card_rankings_file = ''
     set_file = '../../data/kaladesh/kaladesh.json'
     card_rankings_file = '../../data/kaladesh/kaladesh_pick_order.txt'
-    if (len(sys.argv) == 7):
-        set_file = sys.argv[5]
-        card_rankings_file = sys.argv[6]
+    if (len(sys.argv) == 6):
+        set_file = sys.argv[4]
+        card_rankings_file = sys.argv[5]
 
     ## Create PackGenerator for Kaladesh
     pack_gen = PackGenerator(set_file, card_rankings_file)
@@ -86,16 +95,17 @@ def main():
     serialized_draft_data = []
 
     ## Read in the serialized_draft data.
-    serialized_draft_data = read_file_into_list(serialized_draft_filename)
+    for file_name in paths:
+        serialized_draft_data = read_file_into_list(file_name)
 
-    ## Run the tests!
-    datum_picks, ai_picks = ai_tester.run(ai_core, serialized_draft_data)
+        ## Run the tests!
+        datum_picks, ai_picks = ai_tester.run(ai_core, serialized_draft_data)
 
-    ## Write the datum deck (the deck that was supposed to be drafted) to disk.
-    write_deck_to_file(datum_picks, datum_picks_output_filename)
+        ## Write the datum deck (the deck that was supposed to be drafted) to disk.
+        write_deck_to_file(datum_picks, output_dir, file_name, 'datum')
 
-    ## Write the deck the ai chose to draft to disk.
-    write_deck_to_file(ai_picks, ai_picks_output_filename)
+        ## Write the deck the ai chose to draft to disk.
+        write_deck_to_file(ai_picks, output_dir, file_name, 'test')
 
 if __name__ == '__main__':
     main()
