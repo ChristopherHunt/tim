@@ -103,7 +103,7 @@ class JohnnyAI(AICore):
             ## Get the card object from its card number.
             card = self.pack_gen.get_card_from_number(card_index)
 
-            ## For eachc olor, incorporate the synergy score.
+            ## For each color, incorporate the synergy score.
             for color in card.colors:
               if card.colors[color] == True and color is not 'Colorless':
                 score *= (1 + 50 * deck_color_synergy[color])

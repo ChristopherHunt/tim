@@ -226,6 +226,12 @@ class PackGenerator:
             return copy.deepcopy(card)
         return None
 
+    ## Returns a Card object for the card that has the specified card_name, or
+    ## None if no card exists in the current card set that this PackGenerator
+    ## instance is working off of.
+    def get_card_from_name(self, card_name):
+      return copy.deepcopy(self.names_to_cards[card_name])
+
     ## Returns the card color to the caller as a dictionary of the following
     ## form:
     ##        colors = {'White'     : True/False,
