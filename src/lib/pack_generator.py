@@ -22,6 +22,7 @@ class PackGenerator:
 
         self.names_to_cards = {}
         self.names_to_rankings = {}
+        self.nums_to_names = {}
         self.commons = []
         self.uncommons = []
         self.rares = []
@@ -34,7 +35,7 @@ class PackGenerator:
         ## Parse the card json file
         self._read_cards_from_json(set_json_file)
 
-    ## Creates an array of of zeros with size equal to the number of cards in
+    ## Creates an array of zeros with size equal to the number of cards in
     ## the MTG set that the PackGenerator is working off of. For each card in
     ## the input pack, it marks that card's index with a 1. Returns this array.
     def _create_pack_array(self, pack):
@@ -70,6 +71,7 @@ class PackGenerator:
 
             for card in cards_json_obj:
                 card_name = card['name']
+                card_num = card['number']
 
                 # Clear the color values for the new card
                 for color in colors:
@@ -107,10 +109,13 @@ class PackGenerator:
                 self.num_cards_in_set =\
                     max(self.num_cards_in_set, int(card['number']))
 
-                ## Add the card to the dictionary
+                ## Add the card to the dictionary of names --> Card object
                 self.names_to_cards[card_name] =\
                     Card(card_name, colors, rarity,
                     self.names_to_rankings[card_name], card['number'])
+
+                ## Add the card to the dictionary of card_num --> card_name
+                self.nums_to_names[card_num] = card_name
 
     ## Reads the cards in from the card_ranking_file, assigning their rankings
     ## in the order they are listed in the file (with the first card listed
@@ -174,7 +179,7 @@ class PackGenerator:
         ## Set that card's index to a 1 in the pick array
         highest_pick_array[highest_ranked_card_num] = 1
 
-        ## Set all the cards indices to 1 in the pack_array
+        ## For each card in the pack_list, set its value in the pack_array to 1
         for card_num in pack_list[1:]:
             pack_array[int(card_num)] = 1
 
@@ -242,3 +247,33 @@ class PackGenerator:
         if card.number == card_number:
           return copy.deepcopy(card.colors)
       return None
+
+    ## Takes in a list of card numbers and returns a Pack object containing all
+    ## the cards listed in the pack (by index). Will not support duplicate cards
+    ## in any given pack.
+    def convert_card_nums_to_pack(self, card_num_list):
+        pack = Pack([])
+        for card_num in card_num_list:
+          print('card: ')
+          print(self.names_to_cards[self.nums_to_names[card_num]])
+          pack.add(self.names_to_cards[self.nums_to_names[card_num]])
+        return copy.deepcopy(pack)
+
+    ## Takes in a serialized_pack and returns a Pack object containing all the
+    ## cards listed in the pack (by index). Will not support duplicate cards in
+    ## any given pack.
+    def deserialize(self, serialized_pack):
+        serialized_pack.replace(' ', '')
+        pack = Pack()
+        card_nums = serialized_pack.split(',')
+        for card_num in card_nums:
+          pack.add(self.names_to_cards[self.nums_to_names[card_num]])
+        return copy.deepcopy(pack)
+
+    ## Creates and returns a list of card numbers, where each card number
+    ## corresponds to a card in the input card_names_list.
+    def convert_card_names_to_card_nums(self, card_names_list):
+      card_nums = []
+      for card_name in card_names_list:
+        card_nums.append(self.names_to_cards[card_name].number)
+      return copy.deepcopy(card_nums)
