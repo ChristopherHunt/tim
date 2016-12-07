@@ -44,7 +44,8 @@ class Pack:
 
         ## Adjust highest card ranking in the pack if the new card is higher
         ## ranked than any other card in the pack.
-        if card.rank < self.highest_ranked_card.rank:
+        if not self.highest_ranked_card or \
+          self.highest_ranked_card and card.rank < self.highest_ranked_card.rank:
             self.highest_ranked_card = self.cards[-1]  ## The new card
 
     ## Returns the number of cards within the pack.

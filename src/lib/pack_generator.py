@@ -254,8 +254,6 @@ class PackGenerator:
     def convert_card_nums_to_pack(self, card_num_list):
         pack = Pack([])
         for card_num in card_num_list:
-          print('card: ')
-          print(self.names_to_cards[self.nums_to_names[card_num]])
           pack.add(self.names_to_cards[self.nums_to_names[card_num]])
         return copy.deepcopy(pack)
 
