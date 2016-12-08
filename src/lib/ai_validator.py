@@ -30,7 +30,7 @@ class AIValidator(object):
       return copy.deepcopy(deck)
 
     def get_percent_matching_cards(self, datum_decklist, test_decklist):
-      ## Make a dictionary of card --> count for each deck 
+      ## Make a dictionary of card --> count for each deck
       datum_decklist_counts = Counter(datum_decklist)
       test_decklist_counts = Counter(test_decklist)
 
@@ -61,7 +61,12 @@ class AIValidator(object):
 
       ## Return the sum of the differences of color distributions of the two
       ## decks.
-      return 1 - result
+    #   if result > 1:
+        #   print (datum_deck_color_distribution.values(),
+            # test_deck_color_distribution.values())
+        #   input()
+      return result
+
 
     ## Runs comparisons between the datum and test decks and returns a
     ## dictionary of results to the caller.
@@ -69,6 +74,6 @@ class AIValidator(object):
       results = {}
       results['card_similarity'] =\
         self.get_percent_matching_cards(datum_decklist, test_decklist)
-      results['color_similarity'] =\
+      results['color_dissimilarity'] =\
         self.get_percent_color_matching(datum_decklist, test_decklist)
       return copy.deepcopy(results)

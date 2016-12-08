@@ -4,6 +4,7 @@ import copy
 import json
 import os
 import sys
+import glob
 
 ## Import path hacking to make this run referencing the modules it needs.
 PACKAGE_PARENT = '../..'
@@ -26,9 +27,9 @@ def print_usage():
                                              '[set_file.json] '
                                              '[card_rankings.txt]\n'
           '|  output_filename = the file to write the json output to.\n'
-          '|  ai_picks_filename = the file to write the final deck of '
+          '|  ai_picks_dir = the dir to write the final deck of '
                                  'cards picked by the ai to.\n'
-          '|  datum_picks_filename = the file to write the datum deck '
+          '|  datum_picks_dir = the dir to write the datum deck '
                                      'of cards which the ai should pick to.\n'
           '|  set_file.json = json filename containing the MTG cards\n'
           '|  card_rankings.txt = file containing rankings for each card\n')
@@ -52,8 +53,22 @@ def main():
         sys.exit()
 
     output_filename = sys.argv[1]
-    ai_picks_filename = sys.argv[2]
-    datum_picks_filename = sys.argv[3]
+    ai_picks_dir = sys.argv[2]
+    datum_picks_dir = sys.argv[3]
+
+    # generate all paths for the ai files
+    ai_paths = glob.glob(ai_picks_dir + '*.txt')
+    ai_paths.sort()
+    # generate all paths for the datum picks
+    datum_paths = glob.glob(datum_picks_dir + '*.txt')
+    datum_paths.sort()
+
+    # zip the files together based on name
+    zipped_files = zip(datum_paths, ai_paths)
+
+    # for (d,a) in zipped_files:
+        # print (d, a)
+        # input()
 
     set_file = ''
     card_rankings_file = ''
@@ -69,18 +84,32 @@ def main():
     ## Setup the validation environment
     ai_validator = AIValidator(pack_gen)
 
-    ## Read in the datum deck
-    datum_deck = read_file_into_list(datum_picks_filename)
+    results = []
+    for (datum_file, ai_file) in zipped_files:
+        ## Read in the datum deck
+        datum_deck = read_file_into_list(datum_file)
 
-    ## Read in the AI's deck
-    ai_deck = read_file_into_list(ai_picks_filename)
+        ## Read in the AI's deck
+        ai_deck = read_file_into_list(ai_file)
 
-    ## Run the validation!
-    results = {}
-    results = ai_validator.run(datum_deck, ai_deck)
+        ## Run the validation!
+        results.append(ai_validator.run(datum_deck, ai_deck))
+
+    # calculate the average values for card and color. and output to file.
+    total_len = len(results)
+    card = 0
+    color = 0
+    for d in results:
+        card += d['card_similarity']
+        color += d['color_dissimilarity']
+
+    print ('card similarity ', card / total_len)
+    print ('color similarity ', 1 - (color / total_len))
+    # print (results)
+    # input()
 
     ## Write the datum deck (the deck that was supposed to be drafted) to disk.
-    write_json_to_file(results, output_filename)
+    # write_json_to_file(results, output_filename)
 
 if __name__ == '__main__':
     main()
